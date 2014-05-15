@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Microsoft.Office365.Exchange.IEvent>
+
+
+<h2>My Events</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+           Subject
+        </th>
+        <th>
+         Location
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Subject
+        </td>
+        <td>
+            @if (item.Location != null)
+            {
+             @item.Location.DisplayName
+            }
+        </td>
+         
+    </tr>
+}
+
+</table>

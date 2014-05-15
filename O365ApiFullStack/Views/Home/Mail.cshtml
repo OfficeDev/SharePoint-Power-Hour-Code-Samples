@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Microsoft.Office365.Exchange.Message>
+
+@{
+    ViewBag.Title = "Messages";
+}
+
+<h2>Messages</h2>
+<div class="pull-right">
+    @Html.ActionLink("Compose mail", "ComposeMessage","Home",new {@class="btn btn-default btn-primary"})
+</div>
+<br/>
+<table class="table table-striped">
+    <tr>
+        <th>From</th>
+        <th>To</th>
+        <th>Subject</th>
+        <th>Date</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.From.Address</td>
+            <td>
+                @if (item.ToRecipients.Count > 0)
+                {
+                    @item.ToRecipients[0].Address
+                }
+            </td>
+            <td>@item.Subject</td>
+
+            <td>
+                @if (item.DateTimeSent.HasValue)
+                {
+                    @item.DateTimeSent.ToString()
+                }
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,12 @@
+﻿<Application
+    x:Class="MeetAndGreet.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MeetAndGreet">
+    <Application.Resources>
+        <x:String x:Key="ida:ClientID">77214814-6dfd-44d0-94d4-386e0780a422</x:String>
+    
+        <x:String x:Key="ida:AuthorizationUri">https://login.windows.net</x:String>
+    </Application.Resources>
+
+</Application>

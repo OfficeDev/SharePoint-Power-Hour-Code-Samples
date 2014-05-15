@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Microsoft.Office365.Exchange.Contact>
+
+@{
+    ViewBag.Title = "Contacts";
+}
+
+<h2>Contacts</h2>
+ 
+<table class="table table-striped">
+    <tr>
+        <th>Given Name</th>
+        <th>Surname</th>
+        <th>Company</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>@item.GivenName</td>
+        <td>@item.Surname</td>
+        <td>@item.CompanyName</td>
+        <td><a href="@Url.Action("ComposeMessage", "Home", new { recipient = item.EmailAddress1 })"><span class="glyphicon glyphicon-envelope"></span></a></td>
+    </tr>
+}
+
+</table>

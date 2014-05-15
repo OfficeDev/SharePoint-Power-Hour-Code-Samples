@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Microsoft.Office365.ActiveDirectory.IUser>
+
+@{
+    ViewBag.Title = "Azure AD Users";
+}
+
+<h2>Azure AD Users</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>Display Name</th>
+        <th>Mail</th> 
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.DisplayName</td>
+            <td>@item.Mail</td> 
+        </tr>
+    }
+
+</table>
