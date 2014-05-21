@@ -8,7 +8,7 @@
 >
   <Properties>
     <Title>SP.SiteCreator</Title>
-    <StartPage>~remoteAppUrl/Pages/Default.aspx?{StandardTokens}</StartPage>
+    <StartPage>~remoteAppUrl/Pages/Default.aspx?{StandardTokens}&amp;SPHostWebLogo={HostLogoUrl}</StartPage>
   </Properties>
 
   <AppPrincipal>

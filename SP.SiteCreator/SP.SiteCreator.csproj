@@ -46,13 +46,14 @@
     <Content Include="AppIcon.png">
       <OpcRelationship>manifest-icon</OpcRelationship>
     </Content>
-    <Content Include="EmptyElement1\Elements.xml" />
+    <Content Include="Elements.xml" />
     <Content Include="Features\Feature1\Feature1.Template.xml">
       <DependentUpon>Feature1.feature</DependentUpon>
     </Content>
     <Content Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
     </Content>
+    <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <AppManifestFile Include="AppManifest.xml">
@@ -71,14 +72,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="EmptyElement1\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{f25b6fbc-13e1-4286-92bc-8c4d3a81ad92}</SharePointProjectItemId>
-    </None>
     <None Include="Features\Feature1\Feature1.feature">
       <FeatureId>{22a310c5-f0aa-43ff-9510-d2d62d05d3c4}</FeatureId>
     </None>
     <None Include="Package\Package.package">
       <PackageId>{75c3c310-dda1-4b7a-bb4b-524b0e28d6c3}</PackageId>
+    </None>
+    <None Include="SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{59a3b46f-a468-47d8-b89e-e7804c3817af}</SharePointProjectItemId>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
