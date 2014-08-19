@@ -11,8 +11,12 @@ namespace O365ApiFullStack
 {
     public static class MailApiSample
     {
-        const string ExchangeResourceId = "https://outlook.office365.com";
-        const string ExchangeServiceRoot = "https://outlook.office365.com/ews/odata";
+        const string ServiceResourceId = "https://outlook.office365.com";
+        static readonly Uri ServiceEndpointUri = new Uri("https://outlook.office365.com/ews/odata");
+
+        // Do not make static in Web apps; store it in session or in a cookie instead
+        static string _lastLoggedInUser;
+        static DiscoveryContext _discoveryContext;
 
         public static async Task<IEnumerable<IMessage>> GetMessages()
         {
@@ -25,16 +29,33 @@ namespace O365ApiFullStack
             return messageResults.CurrentPage;
         }
 
-        private static async Task<ExchangeClient> EnsureClientCreated()
+        public static async Task<ExchangeClient> EnsureClientCreated()
         {
-            Authenticator authenticator = new Authenticator();
-            var authInfo = await authenticator.AuthenticateAsync(ExchangeResourceId);
+            if (_discoveryContext == null)
+            {
+                _discoveryContext = await DiscoveryContext.CreateAsync();
+            }
 
-            return new ExchangeClient(new Uri(ExchangeServiceRoot), authInfo.GetAccessToken);
+            var dcr = await _discoveryContext.DiscoverResourceAsync(ServiceResourceId);
+
+            _lastLoggedInUser = dcr.UserId;
+
+            return new ExchangeClient(ServiceEndpointUri, async () =>
+            {
+                return (await _discoveryContext.AuthenticationContext.AcquireTokenByRefreshTokenAsync(new SessionCache().Read("RefreshToken"), new Microsoft.IdentityModel.Clients.ActiveDirectory.ClientCredential(_discoveryContext.AppIdentity.ClientId, _discoveryContext.AppIdentity.ClientSecret), ServiceResourceId)).AccessToken;
+            });
         }
-        public static void SignOut(Uri postLogoutRedirect)
+
+        public static Uri SignOut(string postLogoutRedirect)
         {
-            new Authenticator().Logout(postLogoutRedirect);
+            if (_discoveryContext == null)
+            {
+                _discoveryContext = new DiscoveryContext();
+            }
+
+            _discoveryContext.ClearCache();
+
+            return _discoveryContext.GetLogoutUri<SessionCache>(postLogoutRedirect);
         }
 
         public static async Task SendMessage(EmailModel model)

@@ -80,6 +80,10 @@
     <Content Include="Content\site.css" />
     <Content Include="packages.config" />
     <Content Include="README.md" />
+    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -95,9 +99,6 @@
     <Content Include="Scripts\img\gears16.gif" />
     <Content Include="Scripts\img\gears24.gif" />
     <Content Include="Scripts\img\squiggle.png" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Scripts\img\_references.js" />
     <Content Include="Scripts\Office.Controls.css" />
     <Content Include="Scripts\Office.Controls.debug.js" />

@@ -10,7 +10,12 @@ namespace O365ApiFullStack
 {
     public static class ActiveDirectoryApiSample
     {
-        const string AadGraphResource = "https://graph.windows.net/";
+        const string ServiceResourceId = "https://graph.windows.net/";
+        static readonly Uri ServiceEndpointUri = new Uri("https://graph.windows.net/");
+
+        // Do not make static in Web apps; store it in session or in a cookie instead
+        static string _lastLoggedInUser;
+        static DiscoveryContext _discoveryContext;
 
         public static async Task<IEnumerable<IUser>> GetUsers()
         {
@@ -29,16 +34,33 @@ namespace O365ApiFullStack
             return allUsers;
         }
 
-        private static async Task<AadGraphClient> EnsureClientCreated()
+        public static async Task<AadGraphClient> EnsureClientCreated()
         {
-            Authenticator authenticator = new Authenticator();
-            var authInfo = await authenticator.AuthenticateAsync(AadGraphResource);
+            if (_discoveryContext == null)
+            {
+                _discoveryContext = await DiscoveryContext.CreateAsync();
+            }
 
-            return new AadGraphClient(new Uri(AadGraphResource + authInfo.IdToken.TenantId), authInfo.GetAccessToken);
+            var dcr = await _discoveryContext.DiscoverResourceAsync(ServiceResourceId);
+
+            _lastLoggedInUser = dcr.UserId;
+
+            return new AadGraphClient(new Uri(ServiceEndpointUri, dcr.TenantId), async () =>
+            {
+                return (await _discoveryContext.AuthenticationContext.AcquireTokenByRefreshTokenAsync(new SessionCache().Read("RefreshToken"), new Microsoft.IdentityModel.Clients.ActiveDirectory.ClientCredential(_discoveryContext.AppIdentity.ClientId, _discoveryContext.AppIdentity.ClientSecret), ServiceResourceId)).AccessToken;
+            });
         }
-        public static void SignOut(Uri postLogoutRedirect)
+
+        public static Uri SignOut(string postLogoutRedirect)
         {
-            new Authenticator().Logout(postLogoutRedirect);
+            if (_discoveryContext == null)
+            {
+                _discoveryContext = new DiscoveryContext();
+            }
+
+            _discoveryContext.ClearCache();
+
+            return _discoveryContext.GetLogoutUri<SessionCache>(postLogoutRedirect);
         }
     }
 }

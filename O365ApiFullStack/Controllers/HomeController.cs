@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using O365ApiFullStack.Models;
+using Microsoft.Office365.OAuth;
 
 namespace O365ApiFullStack.Controllers
 {
@@ -18,56 +19,111 @@ namespace O365ApiFullStack.Controllers
 
         public async Task<ActionResult> Contacts()
         {
-            var contacts = await ContactsAPISample.GetContacts();
-            return View(contacts);
+            try
+            { 
+                var contacts = await ContactsAPISample.GetContacts();
+                return View(contacts);
+            }
+            catch (RedirectRequiredException ex)
+            {
+                return Redirect(ex.RedirectUri.ToString());
+            }
         }
 
         [HttpGet]
         public ActionResult ComposeMessage(string recipient)
         {
-            EmailModel newModel = new EmailModel(){ Recipient = recipient};
-            return View(newModel);
+            try
+            { 
+                EmailModel newModel = new EmailModel(){ Recipient = recipient};
+                return View(newModel);
+            }
+            catch (RedirectRequiredException ex)
+            {
+                return Redirect(ex.RedirectUri.ToString());
+            }
         }
 
         [HttpPost]
         public async Task<ActionResult> ComposeMessage(EmailModel model)
         {
-            await MailApiSample.SendMessage(model);
-            return RedirectToAction("Index");
+            try
+            { 
+                await MailApiSample.SendMessage(model);
+                return RedirectToAction("Index");
+            }
+            catch (RedirectRequiredException ex)
+            {
+                return Redirect(ex.RedirectUri.ToString());
+            }
         }
 
         public async Task<ActionResult> Mail()
         {
-            var mails = await MailApiSample.GetMessages();
-            return View(mails);
+            try
+            { 
+                var mails = await MailApiSample.GetMessages();
+                return View(mails);
+            }
+            catch (RedirectRequiredException ex)
+            {
+                return Redirect(ex.RedirectUri.ToString());
+            }
         }
 
 
         public async Task<ActionResult> Events()
         {
-            var events = await CalendarAPISample.GetCalendarEvents();
-            return View(events);
+            try
+            { 
+                var events = await CalendarAPISample.GetCalendarEvents();
+                return View(events);            
+            }
+            catch (RedirectRequiredException ex)
+            {
+                return Redirect(ex.RedirectUri.ToString());
+            }
         }
 
         public async Task<ActionResult> Users()
         {
-            var users = await ActiveDirectoryApiSample.GetUsers();
-            return View(users);
+            try
+            {
+                var users = await ActiveDirectoryApiSample.GetUsers();
+                return View(users);
+            }
+            catch (RedirectRequiredException ex)
+            {
+                return Redirect(ex.RedirectUri.ToString());
+            }
         }
 
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            try
+            {
+                ViewBag.Message = "Your application description page.";
+                return View();
+            }
+            catch (RedirectRequiredException ex)
+            {
+                return Redirect(ex.RedirectUri.ToString());
+            }
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            try
+            { 
+                ViewBag.Message = "Your contact page.";
 
-            return View();
+                return View();
+            }
+            catch (RedirectRequiredException ex)
+            {
+                return Redirect(ex.RedirectUri.ToString());
+            }
         }
     }
 }
