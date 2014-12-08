@@ -8,7 +8,7 @@ using System.Linq;
 using System.Web;
 using KeepOnTrack.Data;
 
-namespace TasksWeb.Utils {
+namespace KeepOnTrack.Utils {
 
   public class EFADALTokenCache : TokenCache {
     private KeepOnTrackContext db = new KeepOnTrackContext();

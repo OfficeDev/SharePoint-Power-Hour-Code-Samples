@@ -9,7 +9,6 @@ using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
-using TasksWeb.Utils;
 
 namespace KeepOnTrack.Controllers
 {
