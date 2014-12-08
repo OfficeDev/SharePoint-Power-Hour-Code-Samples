@@ -1,41 +1,38 @@
-﻿@model IEnumerable<Microsoft.Office365.Exchange.Message>
+﻿@model IEnumerable<Microsoft.Office365.OutlookServices.IMessage>
 
 @{
-    ViewBag.Title = "Messages";
+  ViewBag.Title = "Messages";
 }
 
 <h2>Messages</h2>
 <div class="pull-right">
-    @Html.ActionLink("Compose mail", "ComposeMessage","Home",new {@class="btn btn-default btn-primary"})
+  @Html.ActionLink("Compose mail", "ComposeMessage", "Home", new { @class = "btn btn-default btn-primary" })
 </div>
-<br/>
+<br />
 <table class="table table-striped">
+  <tr>
+    <th>From</th>
+    <th>To</th>
+    <th>Subject</th>
+    <th>Date</th>
+  </tr>
+
+  @foreach (var item in Model) {
     <tr>
-        <th>From</th>
-        <th>To</th>
-        <th>Subject</th>
-        <th>Date</th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.From.Address</td>
-            <td>
-                @if (item.ToRecipients.Count > 0)
-                {
-                    @item.ToRecipients[0].Address
+      <td>@item.From.EmailAddress.Address</td>
+          <td>
+            @if (item.ToRecipients.Count > 0) {
+              @item.ToRecipients[0].EmailAddress.Address
                 }
-            </td>
-            <td>@item.Subject</td>
+          </td>
+          <td>@item.Subject</td>
 
-            <td>
-                @if (item.DateTimeSent.HasValue)
-                {
-                    @item.DateTimeSent.ToString()
-                }
-            </td>
+          <td>
+            @if (item.DateTimeSent.HasValue) {
+              @item.DateTimeSent.ToString()
+            }
+          </td>
         </tr>
-    }
+  }
 
 </table>
