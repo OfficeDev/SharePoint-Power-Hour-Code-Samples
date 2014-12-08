@@ -16,7 +16,7 @@ Both Applications are demonstrating how to use Office 365 APIs from within an We
 
 **If you haven't installed Office 365 API Tools, you've to install them using TOOLS | EXTENSIONS AND UPDATES within Visual Studio**
 
-All samples are created with Version 1.1.512 of Office 365 API Tools Preview (which has been shipped during TechEd NA)
+All samples are created with Version 1.3.41104.1 of the Office 365 API Tools.
 
 ## MeetAndGreet
 
