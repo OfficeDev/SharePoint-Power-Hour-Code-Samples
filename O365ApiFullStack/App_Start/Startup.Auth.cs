@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using KeepOnTrack.Utils;
+using O365ApiFullStack.Utils;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
-using KeepOnTrack.Utils;
+using O365ApiFullStack.Utils;
 using Owin;
+using System.Configuration;
 using System.Threading.Tasks;
 
-namespace KeepOnTrack {
+namespace O365ApiFullStack {
   public partial class Startup {
     public void ConfigureAuth(IAppBuilder app) {
       // configure the authentication type & settings

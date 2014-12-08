@@ -4,13 +4,14 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
-using KeepOnTrack.Utils;
+using O365ApiFullStack.Utils;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
+using O365ApiFullStack.Utils;
 
-namespace KeepOnTrack.Controllers
+namespace O365ApiFullStack.Controllers
 {
   public class AccountController : Controller {
     public void SignIn() {

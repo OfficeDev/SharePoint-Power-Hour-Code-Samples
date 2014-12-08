@@ -1,35 +1,32 @@
-﻿@model IEnumerable<Microsoft.Office365.Exchange.IEvent>
+﻿@model IEnumerable<Microsoft.Office365.OutlookServices.IEvent>
 
 @{
-    ViewBag.Title = "Upcoming Events";
+  ViewBag.Title = "Upcoming Events";
 }
 
 <h2>Upcoming Events</h2>
 
 <table class="table table-striped">
-    <tr>
-        <th>Subject</th>
-        <th>Location</th>
-        <th>StartDate</th>
-    </tr>
+  <tr>
+    <th>Subject</th>
+    <th>Location</th>
+    <th>StartDate</th>
+  </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.Subject</td>
-            <td>
-                @if (item.Location != null)
-                {
-                    @item.Location.DisplayName
-                }
-            </td>
-            <td>
-                @if (item.Start.HasValue)
-                {
-                    @item.Start.Value.ToString("g")
-                }
-            </td>
-        </tr>
-    }
+  @foreach (var item in Model) {
+    <tr>
+      <td>@item.Subject</td>
+      <td>
+        @if (item.Location != null) {
+          @item.Location.DisplayName
+        }
+      </td>
+      <td>
+        @if (item.Start.HasValue) {
+          @item.Start.Value.ToString("g")
+        }
+      </td>
+    </tr>
+  }
 
 </table>

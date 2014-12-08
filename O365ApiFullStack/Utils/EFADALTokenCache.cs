@@ -1,4 +1,4 @@
-﻿using KeepOnTrack.Models;
+﻿using O365ApiFullStack.Models;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using System;
 using System.Collections.Generic;
@@ -6,12 +6,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using KeepOnTrack.Data;
+using O365ApiFullStack.Data;
 
-namespace KeepOnTrack.Utils {
+namespace O365ApiFullStack.Utils {
 
   public class EFADALTokenCache : TokenCache {
-    private KeepOnTrackContext db = new KeepOnTrackContext();
+    private O365ApiFullStackkContext db = new O365ApiFullStackkContext();
     string User;
     PerWebUserCache Cache;
 
