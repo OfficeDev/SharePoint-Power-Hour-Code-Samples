@@ -25,3 +25,6 @@ MeetAndGreet shows how to use Office365 API's within a Windows 8.1 Store App.
 ## Further Readme's
 
 Review Project directories for dedicated README.md files. They provide more information on how to get started with each sample.
+
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
