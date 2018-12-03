@@ -1,4 +1,5 @@
-#SharePoint Power Hour#
+[ARCHIVED] SharePoint Power Hour
+================================
 
 This repository provides samples from the **SharePoint Power Hour Session**.
 
